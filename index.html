@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="msg.js"></script>
+</head>
+<body>
+<div id="msg">
+        <table border="1">
+<thead>
+<tr>
+    <th></th>
+    <th>名称</th>
+    <th>日期</th>
+    <th>价格</th>
+    <th>数量</th>
+    <th>操作</th>
+    <th>总价</th>
+
+</tr>
+</thead>
+
+            <tbody v-for="book in books">
+            <td>{{book.id}}</td>
+            <td>{{book.name}}</td>
+            <td>{{book.date}}</td>
+            <td v-model="price">{{book.price}}</td>
+            <td v-model="num">
+                <button v-on:click="minus">-</button>
+                {{ book.num }}
+                <button v-on:click="plus">+</button>
+            </td>
+            <td><button>删除</button></td>
+            <td v-model="sum">{{sum}}</td>
+            </tbody>
+        </table>
+</div>
+</body>
+<script type="text/javascript">
+    var vm=new Vue({
+        el: '#msg',
+        data: {
+
+            books: [{
+                id: '1',
+                name: 'java从入门到放弃',
+                date: '2010-10',
+                price: '60.00',
+                num: '0',
+                sum:'',
+            },
+                {
+                    id: '2',
+                    name: 'PHP从入门到放弃',
+                    date: '2012-10',
+                    price: '90.00',
+                    num: '0',
+                    sum:'',
+                },
+                {
+                    id: '3',
+                    name: 'Python从入门到放弃',
+                    date: '2013-10',
+                    price: '80.01',
+                    num: '0',
+                    sum:'',
+                },
+                {
+                    id: '4',
+                    name: '什么都是从入门到放弃',
+                    date: '2011-10',
+                    price: '70.02',
+                    num: '0',
+                    sum:'',
+                },]
+        },
+
+            computed: {
+                'sum': function(){
+                    return this.num*this.price
+                }
+        },
+
+            minus:function(){
+                if(this.num==0)
+                    this.num=0
+                else
+                    this.num-1
+            },
+            plus:function(){
+                this.num+1},
+
+    })
+</script>
+
+</html>
